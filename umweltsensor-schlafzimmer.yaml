@@ -1,0 +1,7 @@
+substitutions:
+  devicename: schlafzimmer
+  upper_devicename: Schlafzimmer
+
+packages:
+  common: !include includes/common.yaml
+  device_base: !include devices/umweltsensor.yaml

@@ -1,0 +1,14 @@
+logger:
+  baud_rate: 0
+
+packages:
+  api: !include api.yaml
+  wifi: !include wifi.yaml
+  ota: !include ota.yaml
+  webserver: !include webserver.yaml
+
+prometheus:
+
+sensor:
+  - platform: uptime
+    name: "${upper_devicename} Uptime"

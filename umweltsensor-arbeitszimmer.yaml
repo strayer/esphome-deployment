@@ -1,0 +1,8 @@
+substitutions:
+  devicename: arbeitszimmer
+  upper_devicename: Arbeitszimmer
+
+packages:
+  common: !include includes/common.yaml
+  device_base: !include devices/umweltsensor.yaml
+

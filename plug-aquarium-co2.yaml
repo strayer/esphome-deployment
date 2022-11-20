@@ -1,0 +1,33 @@
+substitutions:
+  devicename: aquarium-co2
+  upper_devicename: Aquarium CO2
+
+packages:
+  base: !include includes/base.yaml
+  device_base: !include devices/delock-11826.yaml
+
+script:
+  - id: toggle_relay
+    then:
+      lambda: |-
+        auto hour = id(homeassistant_time).now().hour;
+        auto minute = id(homeassistant_time).now().minute;
+        if (hour >= 6 && hour < 19 && !(hour == 18 && minute >= 30)) {
+          if (!id(relay).state) {
+            ESP_LOGD("main", "Relay should be on, but is off");
+            id(relay).turn_on();
+          }
+        } else {
+          if (id(relay).state) {
+            ESP_LOGD("main", "Relay should be off, but is on");
+            id(relay).turn_off();
+          }
+        }
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    timezone: Europe/Berlin
+    on_time:
+      - seconds: /5
+        then:
+          - script.execute: toggle_relay

@@ -1,0 +1,38 @@
+esphome:
+  name: umweltsensor-${devicename}
+  platform: ESP8266
+  board: d1_mini
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 9600
+
+dallas:
+  - pin: D0
+
+i2c:
+  sda: D2
+  scl: D1
+  scan: true
+  id: bus_a
+
+sensor:
+  - platform: mhz19
+    co2:
+      name: "${upper_devicename} MH-Z19 CO2 Value"
+    update_interval: 60s
+    automatic_baseline_calibration: true
+  - platform: dallas
+    name: "${upper_devicename} DS18B20 Temperature"
+    index: 0
+  - platform: bme280
+    temperature:
+      name: "${upper_devicename} BME280 Temperature"
+      oversampling: 16x
+    pressure:
+      name: "${upper_devicename} BME280 Pressure"
+    humidity:
+      name: "${upper_devicename} BME280 Humidity"
+    update_interval: 60s
+    address: 0x76

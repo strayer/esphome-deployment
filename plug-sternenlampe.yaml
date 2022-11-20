@@ -1,0 +1,7 @@
+substitutions:
+  devicename: sternenlampe
+  upper_devicename: Sternenlampe
+
+packages:
+  common: !include common.yaml
+  device_base: !include devices/delock-11826.yaml

@@ -1,0 +1,8 @@
+substitutions:
+  devicename: wohnzimmer
+  upper_devicename: Wohnzimmer
+
+packages:
+  common: !include includes/common.yaml
+  device_base: !include devices/umweltsensor-bme680.yaml
+
